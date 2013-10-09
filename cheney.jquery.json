@@ -1,0 +1,22 @@
+{
+	"name"    		 : "cheney",
+	"title"   		 : "Cheney",
+	"description"  : "Sane user interface and event handling for Quail.",
+	"keywords"     : ["accessibility", "content"],
+	"homepage"     : "http://quailjs.org/cheney",
+	"version" 		 : "0.1",
+	"author"  		 : {
+								 		"name"  : "Kevin Miller",
+										"email" : "kevin@csumb.edu",
+										"url"   : "http://kevee.org"
+	},						
+	"licenses"		 : [
+						  		  {
+						  		      "type": "GPLv2",
+						  		      "url": "http://quailjs.org/license"
+						  		  }
+	],						
+	"dependencies" : {
+      							"jquery" 					 : ">1.4.2"
+	}
+}

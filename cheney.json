@@ -1,0 +1,28 @@
+{
+  "name": "cheney",
+  "title": "Cheney",
+  "description": "Sane user interface and event handling for Quail.",
+  "version": "0.1",
+  "homepage": "https://github.com/kevee/cheney",
+  "author": {
+    "name": "Kevin Miller",
+    "email": "kevin@csumb.edu"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kevee/cheney.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kevee/cheney/issues"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "https://github.com/kevee/cheney/blob/master/LICENSE-GPL"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">= 1.7"
+  },
+  "keywords": []
+}
