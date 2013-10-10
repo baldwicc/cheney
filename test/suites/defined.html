@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+<title>Test that cheney is loaded and defined</title>
+<link rel="stylesheet" href="../qunit/qunit.css" media="screen">
+</head>
+<body>
+<div id="qunit"></div>
+	<div id="qunit-fixture"></div>
+<p>Tests whether the current page has cheney loaded.</p>
+<script id="qunit-quail" src="../../quail/libs/jquery/jquery.js"></script>
+<script id="qunit-quail" src="../../quail/src/quail.js"></script>
+<script id="qunit-qunit" src="../qunit/qunit.js"></script>
+<script id="qunit-qunit" src="../../dist/cheney.js"></script>
+<script>
+  (function($) {
+  	test('cheneyIsLoaded', function() {
+	    equal(true, typeof $().cheney !== 'undefined', 'Cheney plugin is defined');
+	  });
+	})(jQuery);
+</script>
+</body>
+</html>

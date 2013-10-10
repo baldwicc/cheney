@@ -8,14 +8,17 @@
   <link rel="stylesheet" href="qunit/qunit.css" media="screen">
 	<link rel="stylesheet" href="qunit/composite/qunit-composite.css">
 	<script src="qunit/qunit.js"></script>
+	<script src="qunit/composite/qunit-composite.js"></script>
 
 	<script>
-	//QUnit.testSuites([]);
+	QUnit.testSuites([
+		'suites/defined.html'
+	]);
 	</script>
 </head>
 <body>
 	<div id="qunit"></div>
-	<div id="qunit-fixture">
+	<div id="qunit-fixture"></div>
 </div>
 </body>
 </html>

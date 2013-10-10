@@ -7,12 +7,20 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('cheney.json'),
     concat: {
       options: {
-        banner: '/*! Cheney for Quail quailjs.org/cheney | quailjs.org/license */' + "\n",
+        banner: '/*! Cheney for Quail quailjs.org/cheney | quailjs.org/license */' + "\n" + '(function($) {',
+        footer: '})(jQuery)',
         stripBanners: true
       },
       dist: {
-        src: ['src/cheney.js'],
+        src: ['src/js/core.js', 'src/js/console.js'],
         dest: 'dist/cheney.js'
+      }
+    },
+    less : {
+      production: {
+        files : {
+          'dist/cheney.css' : 'src/less/cheney.less'
+        }
       }
     },
     uglify: {
@@ -58,16 +66,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
-
-  // Linting, mostly to test JSON.
-  grunt.registerTask('lint', ['jshint']);
-
-  // By default, just run tests
-  grunt.registerTask('default', ['test']);
+  grunt.loadNpmTasks('grunt-contrib-less');
 
   // Release task.
-  grunt.registerTask('release', ['jshint', 'qunit', 'concat', 'uglify']);
-
-  // Test task.
-  grunt.registerTask('test', ['jshint', 'qunit']);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'less', 'qunit']);
 };
