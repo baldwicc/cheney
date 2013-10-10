@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       }
     },
     qunit: {
-      files: ['test/cheney.html']
+      files: ['test/index.html']
     },
     watch: {
       files: '<%= jshint.files %>',
