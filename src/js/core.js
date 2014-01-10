@@ -4,7 +4,7 @@ $.fn.cheney = function(options) {
     return this;
   }
   cheney.options = options;
-
+  cheney.addPopover($);
   cheney.html = this;
   cheney.run();
   
@@ -29,58 +29,75 @@ cheney.run = function() {
   }
   that.html.quail({ guideline : this.options.guideline,
     accessibilityTests : this.options.tests,
-    testFailed : this.highlightElement,
+    testFailed : this.addItem,
     reset : true
   });
 };
 
-cheney.highlightElement = function(event) {
-  var that = cheney;
-  if (!event.element.hasClass('cheney-result')) {
-    event.element.addClass('cheney-result')
-         .addClass(event.severity);
-    var $link = $('<a>')
-                 .html(event.severity)
-                 .attr('href', '#cheney-console')
-                 .attr('role', 'command')
-                 .addClass('cheney-indicator')
-                 .addClass(event.severity);
-    event.element.before($link);
-    if(typeof that.options.clickEvent === 'undefined') {
-      cheney.attachHint(event);
-    }
-    else {
-      that.options.clickEvent(event);
-    }
+cheney.language = {
+  severity : {
+    severe : 'Severe',
+    moderate : 'Moderate',
+    suggestion: 'Suggestion'
   }
-  var elementTests = event.element.data('cheney-tests') || { };
-  elementTests[event.testName] = event.testName;
-  event.element.add(event.element.prev($('cheney-icon'))).data('cheney-tests', elementTests);
-    
 };
 
-cheney.attachHint = function(event, $context) {
-  $context = $context || $('body');
-  var that = this;
-  event.element.add(event.element.prev($('.cheney-icon')))
-               .click(function(event) {
-                 var tests = $(this).data('cheney-tests');
-                 that.errorConsole.showTests(tests);
-                 $('html, body').animate({
-                   scrollTop: $(this).offset().top
-                 }, 10);
-                 that.errorConsole.setCurrentElement($(this), $context);
-                 event.preventDefault();
-               });
+cheney.addItem = function(event) {
+  if(event.element.data('cheney-error')) {
+    cheney.addAdditionalItem(event.test, event.element);
+    return;
+  }
+  event.element.data('cheney-error', true);
+  if(event.element.css('display') == 'inline') {
+    var $thisWrap = $('<span>').addClass('cheney-error');
+  }
+  else {
+    var $thisWrap = $('<div>').addClass('cheney-error');
+  }
+  var $icon = $('<a>').attr('href', '#' + event.testName)
+                      .addClass('cheney-icon')
+                      .addClass('cheney')
+                      .html(cheney.language.severity[event.severity]);
+  $thisWrap.addClass('cheney-' + event.severity);
+  event.element.wrap($thisWrap);
+  $icon = event.element.parent('.cheney-error')
+         .append($icon.clone())
+         .find('.cheney-icon');
+  $icon.data('cheney-title', [event.test.title.en]);
+  $icon.data('cheney-content', [event.test.description.en]);
+  $icon.popover({ trigger   : 'manual',
+                  offset    : cheney.popoverOffset
+                })
+       .on({click : cheney.tooltip, focus : cheney.tooltip });
+  
+  if(event.element.get(0).tagName.toLowerCase() == 'img') {
+    event.element.parent('.cheney-error')
+           .css('height', event.element.height() + 'px')
+           .css('display', 'inline-block');
+  }
+  cheney.total++;
 };
 
-cheney.cleanUpHighlight = function($context) {
-  $context = $context || $('html');
-  $context.find('.cheney-result').each(function() {
-    $(this).removeClass('cheney-result')
-           .removeClass('severe')
-           .removeClass('moderate')
-           .removeClass('suggestion');
+cheney.addAdditionalItem = function(test, element) {
+  var $icon = element.parent('.cheney-error').find('.cheney-icon');
+  var title = $icon.data('cheney-title');
+  if(!title) {
+    return;
+  }
+  title.push(test.title);
+  var content = $icon.data('cheney-content');
+  content.push(test.body);
+  $icon.data('cheney-title', title);
+  $icon.data('cheney-content', content);
+};
+
+cheney.tooltip = function(event) {
+  var $link = $(this);
+  $('.cheney-icon').each(function() {
+    if(!$(this).is($link)) {
+      $(this).popover('hide');
+    }
   });
-  $context.find('.cheney-icon, .cheney-icon-current').remove();
+  $link.popover('toggle');
+  return false;
 };

@@ -8,10 +8,10 @@
 	<body>
 
 		<div id="content">
-			<p>This is a paragraph with a picture of my dog. <img src="http://quailjs.org/img/kogepan.png"></p>
+			<p>This is a paragraph with a picture of my dog. <img src="http://quailjs.org/img/kogepan.png" title="woah"></p>
 			<p><strong>This paragraph should be a header</strong></p>,
 		</div>
-		<script src="../quail/libs/jquery/jquery.js"></script>
+		<script src="../quail/lib/jquery/jquery.js"></script>
 		<script src="../dist/cheney.jquery.js"></script>
 		<script src="../quail/dist/quail.jquery.js"></script>
 		<script>
@@ -25,9 +25,9 @@
 					}
 
 					$('#content').cheney({
-						guideline : ['imgHasAlt'],
+						guideline : ['imgHasAlt', 'imgShouldNotHaveTitle'],
 						messages : messages,
-						tests : '../quail/src/resources/tests.json',
+						tests : '../quail/dist/tests.json',
 						showToggle : true
 					});
 				});

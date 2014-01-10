@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/js/core.js', 'src/js/console.js'],
+        src: ['src/js/*.js'],
         dest: 'dist/cheney.jquery.js'
       }
     },
