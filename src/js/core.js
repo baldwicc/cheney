@@ -27,11 +27,10 @@ cheney.run = function() {
           }
       }});
   }
-  that.html.quail({ guideline : this.options.guideline,
-    accessibilityTests : this.options.tests,
-    testFailed : this.addItem,
-    reset : true
-  });
+  this.options.accessibilityTests = this.options.tests;
+  this.options.testFailed = this.addItem;
+  this.options.reset = true;
+  that.html.quail(this.options);
 };
 
 cheney.language = {
