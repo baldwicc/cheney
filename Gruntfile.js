@@ -21,7 +21,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/js/core.js', 'src/js/console.js'],
-        dest: 'dist/cheney.js'
+        dest: 'dist/cheney.jquery.js'
       }
     },
     less : {
@@ -37,16 +37,12 @@ module.exports = function(grunt) {
       },
       dist: {
         files : {
-          'dist/cheney.min.js' : 'dist/cheney.js'
+          'dist/cheney.jquery.min.js' : 'dist/cheney.jquery.js'
         }
       }
     },
     qunit: {
       files: ['test/index.html']
-    },
-    watch: {
-      files: '<%= jshint.files %>',
-      tasks: 'test'
     },
     jshint: {
       options: {
@@ -66,17 +62,26 @@ module.exports = function(grunt) {
         }
       },
       files: ['Gruntfile.js', 'src/cheney.js']
+    },
+    watch: {
+      scripts: {
+        files: ['src/js/*', 'src/less/*'],
+        tasks: ['jshint', 'concat', 'uglify', 'less'],
+        options: {
+          spawn: false
+        }
+      }
     }
   });
   
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'less', 'qunit']);
   grunt.registerTask('package', ['jshint', 'concat', 'uglify', 'less']);

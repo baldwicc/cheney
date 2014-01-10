@@ -8,31 +8,56 @@
   }
 }
 
-.cheney-result.severe, .cheney-link.severe img, .cheney-result._severe {
-  border-color: #994141;
+.cheney-result.severe, .cheney-indicator.severe  {
+  border-color: #d43f3a;
 }
 
-.cheney-result.moderate, .cheney-link.moderate img, .cheney-result._moderate {
-  border-color: #2e71a0;
+.cheney-result.moderate, .cheney-indicator.moderate {
+  border-color: #285e8e;
 }
 
-.cheney-result.suggestion, .cheney-link.suggestion img, .cheney-result._suggestion {
-  border-color: #36af60;
+.cheney-result.suggestion, .cheney-indicator.suggestion {
+  border-color: #398439;
 }
 
-
-.cheney-icon img, .cheney-icon-current {
-  width: 23px;
-  height: 23px;
-  margin-right: -23px;
+.cheney-indicator {
   display: inline-block;
   z-index: 1000;
   position: absolute;
+  border-radius: 5px 0 5px 0;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 5px 4px;
+  margin: 2px 0 0 2px;
+  text-decoration: none;
 }
 
-.cheney-icon-current {
-  margin-right: auto;
-  margin-left: -23px;
+.cheney-indicator:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.cheney-indicator.severe {
+  background: #d9534f;
+}
+
+.cheney-indicator.moderate {
+  background: #3276b1;
+}
+
+.cheney-indicator.suggestion {
+  background: #47a447;
+}
+
+.cheney-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
 }
 
 #cheney-console {

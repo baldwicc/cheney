@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Simple console example</title>
+		<link href="../dist/cheney.css" rel="stylesheet"/>
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+	</head>
+	<body>
+
+		<div id="content">
+			<p>This is a paragraph with a picture of my dog. <img src="http://quailjs.org/img/kogepan.png"></p>
+			<p><strong>This paragraph should be a header</strong></p>,
+		</div>
+		<script src="../quail/libs/jquery/jquery.js"></script>
+		<script src="../dist/cheney.jquery.js"></script>
+		<script src="../quail/dist/quail.jquery.js"></script>
+		<script>
+			(function($) {
+				$(document).ready(function() {
+					var messages = {
+						imgHasAlt : {
+							title : 'This image is missing an "alt" attribute',
+							content : 'You better fix this now.'
+						}
+					}
+
+					$('#content').cheney({
+						guideline : ['imgHasAlt'],
+						messages : messages,
+						tests : '../quail/src/resources/tests.json',
+						showToggle : true
+					});
+				});
+			})(jQuery);
+		</script>
+	</body>
+</html>

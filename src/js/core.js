@@ -1,6 +1,6 @@
 
 $.fn.cheney = function(options) {
-  if (!this.length) {
+  if (!this.length || typeof options.tests === 'undefined') {
     return this;
   }
   cheney.options = options;
@@ -15,20 +15,36 @@ var cheney = {};
 
 cheney.options = {};
 
+cheney.run = function() {
+  var that = this;
+  if(typeof this.options.tests === 'string') {
+    $.ajax({ url : this.options.tests,
+       async : false,
+       dataType : 'json',
+       success : function(data) {
+          if(typeof data === 'object') {
+            that.options.tests = data;
+          }
+      }});
+  }
+  that.html.quail({ guideline : this.options.guideline,
+    accessibilityTests : this.options.tests,
+    testFailed : this.highlightElement,
+    reset : true
+  });
+};
+
 cheney.highlightElement = function(event) {
   var that = cheney;
   if (!event.element.hasClass('cheney-result')) {
     event.element.addClass('cheney-result')
          .addClass(event.severity);
-    var $image = $('<img>')
-                 .attr('alt', (typeof that.options.strings.severity[event.severity] !== 'undefined') ? that.options.strings.severity[event.severity] : event.severity)
-                 .attr('src', that.options.iconPath + event.severity + '.png');
     var $link = $('<a>')
-                .attr('href', '#cheney-console')
-                .attr('role', 'command')
-                .addClass('cheney-icon')
-                .addClass(event.severity)
-                .append($image);
+                 .html(event.severity)
+                 .attr('href', '#cheney-console')
+                 .attr('role', 'command')
+                 .addClass('cheney-indicator')
+                 .addClass(event.severity);
     event.element.before($link);
     if(typeof that.options.clickEvent === 'undefined') {
       cheney.attachHint(event);
@@ -37,12 +53,6 @@ cheney.highlightElement = function(event) {
       that.options.clickEvent(event);
     }
   }
-  var test = that.settings.tests[event.testName].testId;
-  /*if (typeof that.messages[test] == 'undefined') {
-    $.getJSON(Drupal.settings.basePath + 'cheney-test/' + test + '/json', function(data) {
-      that.messages[test] = data;
-    });
-  }*/
   var elementTests = event.element.data('cheney-tests') || { };
   elementTests[event.testName] = event.testName;
   event.element.add(event.element.prev($('cheney-icon'))).data('cheney-tests', elementTests);
