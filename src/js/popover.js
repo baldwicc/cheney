@@ -238,6 +238,7 @@ cheney.addPopover = function($) {
       }
       var next = '';
       var prev = '';
+      console.log(titles);
       if(error + 1 < titles.length) {
         next = '<a href="#" class="cheney-pager next"><span class="cheney-invisible">Next error</span>&raquo;</a>';
       }

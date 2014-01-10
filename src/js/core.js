@@ -84,9 +84,9 @@ cheney.addAdditionalItem = function(test, element) {
   if(!title) {
     return;
   }
-  title.push(test.title);
+  title.push(test.title.en);
   var content = $icon.data('cheney-content');
-  content.push(test.body);
+  content.push(test.description.en);
   $icon.data('cheney-title', title);
   $icon.data('cheney-content', content);
 };
