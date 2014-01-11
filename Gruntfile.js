@@ -63,6 +63,9 @@ module.exports = function(grunt) {
           spawn: false
         }
       }
+    },
+    bower: {
+      install: { }
     }
   });
   
@@ -71,10 +74,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-shell');
-  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'less', 'qunit']);
-  grunt.registerTask('package', ['jshint', 'concat', 'uglify', 'less']);
+  grunt.registerTask('default', ['bower:install', 'jshint', 'concat', 'uglify', 'less', 'qunit']);
+  grunt.registerTask('package', ['bower:install', 'jshint', 'concat', 'uglify', 'less']);
 };

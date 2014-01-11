@@ -1,0 +1,15 @@
+{
+  "name": "cheney",
+  "version": "1.0.0",
+  "main": "dist/cheney.jquery.js",
+  "ignore": [
+    ".jshintrc"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "quail": "~2.1.0"
+  },
+  "devDependencies": {
+    "qunit": "~1.12.0"
+  }
+}
