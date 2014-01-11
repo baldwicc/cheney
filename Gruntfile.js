@@ -5,14 +5,6 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('cheney.json'),
-    clean: {
-      hooks: ['.git/hooks/pre-commit']
-    },
-    shell: {
-      hooks: {
-        command: 'cp git-hooks/pre-commit .git/hooks/'
-      }
-    },
     concat: {
       options: {
         banner: '/*! Cheney for Quail quailjs.org/cheney | quailjs.org/license */' + "\n" + '(function($) {',
@@ -85,5 +77,4 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'less', 'qunit']);
   grunt.registerTask('package', ['jshint', 'concat', 'uglify', 'less']);
-  grunt.registerTask('hookmeup', ['clean', 'shell']);
 };
