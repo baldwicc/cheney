@@ -7,7 +7,7 @@
   ],
   "dependencies": {
     "jquery": "~2.0.3",
-    "quail": "~2.1.0"
+    "quail": "~2.1.1"
   },
   "devDependencies": {
     "qunit": "~1.12.0"
