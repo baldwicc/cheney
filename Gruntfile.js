@@ -1,14 +1,25 @@
 /*! Cheney for Quail quailjs.org | quailjs.org/license */
 /*global module:false*/
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('cheney.json'),
     concat: {
       options: {
-        banner: '/*! Cheney for Quail quailjs.org/cheney | quailjs.org/license */' + "\n" + '(function($) {',
-        footer: '})(jQuery)',
+        banner: [
+          "'/*! Cheney for Quail quailjs.org/cheney | quailjs.org/license */'",
+          "!function(root, factory) {",
+          "  if (typeof define === 'function' && define.amd) {",
+          "    define(['jquery'], factory);",
+          "  } else {",
+          "    factory(root.jQuery);",
+          "  }",
+          "}(this, function($) {",
+          "  'use strict';",
+          "  var jQuery = jQuery || $;"
+        ].join("\n"),
+        footer: "\n" + '});',
         stripBanners: true
       },
       dist: {
@@ -16,10 +27,10 @@ module.exports = function(grunt) {
         dest: 'dist/cheney.jquery.js'
       }
     },
-    less : {
+    less: {
       production: {
-        files : {
-          'dist/cheney.css' : 'src/less/cheney.less'
+        files: {
+          'dist/cheney.css': 'src/less/cheney.less'
         }
       }
     },
@@ -28,8 +39,8 @@ module.exports = function(grunt) {
         banner: '<%= concat.options.banner %>'
       },
       dist: {
-        files : {
-          'dist/cheney.jquery.min.js' : 'dist/cheney.jquery.js'
+        files: {
+          'dist/cheney.jquery.min.js': 'dist/cheney.jquery.js'
         }
       }
     },
@@ -50,7 +61,7 @@ module.exports = function(grunt) {
         eqnull: true,
         browser: true,
         globals: {
-            jQuery: true
+          jQuery: true
         }
       },
       files: ['Gruntfile.js', 'src/cheney.js']
@@ -65,10 +76,10 @@ module.exports = function(grunt) {
       }
     },
     bower: {
-      install: { }
+      install: {}
     }
   });
-  
+
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
