@@ -11,7 +11,7 @@ module.exports = function (grunt) {
           "'/*! Cheney for Quail quailjs.org/cheney | quailjs.org/license */'",
           "!function(root, factory) {",
           "  if (typeof define === 'function' && define.amd) {",
-          "    define(['jquery'], factory);",
+          "    define(['jquery', 'quail'], factory);",
           "  } else {",
           "    factory(root.jQuery);",
           "  }",
